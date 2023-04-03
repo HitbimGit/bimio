@@ -1,1 +1,5 @@
 node_modules
+
+# Built Files
+.bimio
+bimio.exe
