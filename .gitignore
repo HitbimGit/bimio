@@ -130,3 +130,9 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Built Files
+.bimio
+bimio.exe
+
+# auto-generated
+package-lock.json

@@ -1,0 +1,27 @@
+{
+  "name": "bim-io",
+  "version": "0.0.4",
+  "description": "hitbim plugin generator",
+  "main": "bin/bimio",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-window": "pkg . --targets node14-win-x64 --output bimio.exe",
+    "build-mac": "pkg . --targets node14-macos-x64 --output bimio"
+  },
+  "bin": {
+    "bimio": "bin/bimio"
+  },
+  "pkg": {
+    "assets": [
+      "node_modules/figlet/fonts/Standard.flf"
+    ]
+  },
+  "author": "Hitbim",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "3.0.0",
+    "commander": "^10.0.0",
+    "dotenv": "^16.0.3",
+    "figlet-promised": "^1.0.0"
+  }
+}
