@@ -17,8 +17,9 @@
     "assets": [
       "node_modules/figlet/fonts/Standard.flf",
       "node_modules/axios/**/*",
-      "config/.env_dev",
-      "config/.env_prod",
+      "config/.env.dev",
+      "config/.env.prod",
+      "config/.env.local",
       "views/**/*",
       "assets/**/*"
     ]
