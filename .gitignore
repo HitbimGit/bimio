@@ -79,6 +79,8 @@ web_modules/
 .env.test.local
 .env.production.local
 .env.local
+.env_dev
+.env_prod
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -133,6 +135,8 @@ dist
 # Built Files
 .bimio
 bimio.exe
+build/
 
 # auto-generated
 package-lock.json
+tokens.json

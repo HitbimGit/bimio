@@ -1,7 +1,18 @@
-node_modules
+node_modules/
+package-lock.json
 .git
 .gitignore
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+.env_dev
+.env_prod
 
 # Built Files
 .bimio
 bimio.exe
+build/

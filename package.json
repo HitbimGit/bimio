@@ -1,30 +1,55 @@
 {
-  "name": "bim-io",
-  "version": "0.0.4",
-  "description": "hitbim plugin generator",
+  "name": "bimio",
+  "version": "0.0.1",
+  "description": "CLI for Hitbim Plugin Development",
   "main": "bin/bimio",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-window": "pkg . --targets node14-win-x64 --output bimio.exe",
-    "build-mac": "pkg . --targets node14-macos-x64 --output bimio"
+    "bimio:prod": "cross-env NODE_ENV=prod node bin/bimio",
+    "bimio:dev": "cross-env NODE_ENV=dev DEBUG=* node bin/bimio",
+    "bimio:local": "cross-env NODE_ENV=local DEBUG=* node bin/bimio",
+    "build:window": "pkg . --targets node14-win-x64 --output bimio.exe",
+    "build:mac": "pkg . --targets node14-macos-x64 --output bimio"
   },
   "bin": {
     "bimio": "bin/bimio"
   },
   "pkg": {
     "assets": [
-      "node_modules/figlet/fonts/Standard.flf"
+      "node_modules/figlet/fonts/Standard.flf",
+      "node_modules/axios/**/*",
+      "config/.env_dev",
+      "config/.env_prod",
+      "views/**/*",
+      "assets/**/*"
     ]
   },
   "author": "Hitbim",
   "license": "ISC",
   "dependencies": {
+    "address": "^1.2.2",
+    "adm-zip": "^0.5.10",
     "archiver": "^5.3.1",
-    "chalk": "3.0.0",
+    "axios": "^0.27.2",
+    "browserslist": "^4.21.9",
+    "chalk": "^4.1.2",
+    "child_process": "^1.0.2",
+    "cli-table": "^0.3.11",
     "commander": "^10.0.0",
     "cookie-parser": "^1.4.6",
+    "cross-env": "^7.0.3",
+    "cross-spawn": "^7.0.3",
+    "debug": "^4.3.4",
+    "detect-port-alt": "^1.1.6",
     "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "figlet-promised": "^1.0.0"
+    "figlet-promised": "^1.0.0",
+    "find-up": "^5.0.0",
+    "ip": "^1.1.8",
+    "is-root": "^2.1.0",
+    "open": "^8.4.2",
+    "prompts": "^2.4.2",
+    "readline": "^1.3.0",
+    "serve-favicon": "^2.5.0"
   }
 }

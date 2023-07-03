@@ -1,0 +1,116 @@
+<!--
+  All files and information contained in this Software are copyright by Hitbim,
+  and may not be duplicated, copied, modified or adapted, in any way without our written permission.
+
+  Our Software, Tools, Website, and Services may contain our service marks or trademarks as well as those of our affiliates
+  or other companies, in the form of words, graphics, and logos.
+
+  Your use of our Software and Services does not constitute any right or license for you
+  to use our Services, Tools, Software, marks or trademarks, without the prior written permission of Hitbim.
+
+  Our Content, as found within our Software, Website, Tools and Services, are protected under United States and foreign copyrights.
+  The copying, redistribution, use or publication by you of any such Content, is strictly prohibited.
+  Your use of our Software, Website, Tools and Services does not grant you any ownership rights to our Content.
+
+  Copyright © https://hitbim.com Hitbim ©. All Rights Reserved.
+-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google" content="notranslate" />
+    <title>Hitbim | Emulator</title>
+    <link
+      rel="stylesheet"
+      href="/assets/css/bootstrap.min.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="/assets/css/devices.min.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="/assets/css/fonts.googleapis.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="/assets/css/emulator.css" type="text/css" />
+    <script src="/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="/assets/js/emulator.js"></script>
+  </head>
+  <body>
+    <div id="side-container">
+      <header>
+        <div class="hb-logo-wrap">
+          <img
+            class="hb-logo"
+            src="/assets/img/logo-black.png"
+            alt="HitBim"
+            title="HitBim"
+          />
+        </div>
+      </header>
+      <div id="plugin-list-wrap">
+        <h3>Plugin list</h3>
+        <div id="plugin-list" title="plugin list">
+          <% appData.forEach(function (pluginData, index) { %>
+          <div
+            class="<%= index === 0 ? 'plugin-item selected' : 'plugin-item' %>"
+            data-index="<%= pluginData.index %>"
+            data-name="<%= pluginData.pluginName %>"
+            title="<%= pluginData.pluginName %>"
+          >
+            <%= pluginData.pluginName %> plugin
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+    <div id="main-container">
+      <header>
+        <div id="ems-device-button-container">
+          <div class="ems-device-button android active" title="android">
+            <div></div>
+          </div>
+          <div class="ems-device-button iphone" title="ios">
+            <div></div>
+          </div>
+          <div class="ems-device-button refresh" title="refresh">
+            <div></div>
+          </div>
+          <div class="ems-device-button zoomout" title="full screen">
+            <div></div>
+          </div>
+        </div>
+      </header>
+      <div class="content">
+        <main
+          data-app="<%= JSON.stringify(appData) %>"
+          data-component="<%= JSON.stringify(componentData) %>"
+        >
+          <article id="ems-main-container">
+            <section id="ems-device-container">
+              <div id="ems-device-frame-container">
+                <iframe
+                  id="ems-device-iframe"
+                  class="loading"
+                  src=""
+                  frameborder="0"
+                ></iframe>
+                <div id="ems-tabbar-iframe-div" class="loading">
+                  <iframe
+                    id="ems-device-iframe-tabbar"
+                    src=""
+                    frameborder="0"
+                    style="width: 100%; height: 100%"
+                  ></iframe>
+                  <div class="bar"></div>
+                </div>
+                <div id="ems-device-frame-div"></div>
+              </div>
+            </section>
+          </article>
+        </main>
+      </div>
+      <footer></footer>
+    </div>
+  </body>
+</html>
