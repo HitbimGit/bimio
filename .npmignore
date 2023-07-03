@@ -9,10 +9,13 @@ package-lock.json
 .env.test.local
 .env.production.local
 .env.local
-.env_dev
-.env_prod
+.env.dev
+.env.prod
 
 # Built Files
 .bimio
 bimio.exe
 build/
+
+# Backup Files
+*backup*
