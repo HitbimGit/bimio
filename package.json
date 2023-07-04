@@ -1,6 +1,6 @@
 {
   "name": "@flipperhitbim/bimio",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "CLI for Hitbim Plugin Development",
   "main": "bin/bimio",
   "repository": {
@@ -19,6 +19,7 @@
     "bimio": "bin/bimio"
   },
   "author": "Hitbim",
+  "homepage": "https://developer.hitbim.com",
   "license": "ISC",
   "keywords": [
     "bimio",
