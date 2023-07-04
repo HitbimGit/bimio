@@ -1,9 +1,11 @@
 "use strict";
 
+const chalk = require("chalk");
+const debugError = require("debug")("error");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const path = require("path");
-const debugError = require("debug")("error");
+const comm = require("../lib/common/common.js");
 
 const envFile = (() => {
   // Set 'prod' as default NODE_ENV
@@ -24,9 +26,9 @@ const envPath = path.join(__dirname, envFile);
 if (fs.existsSync(envPath)) {
   let _env = dotenv.config({ path: envPath });
   if (_env.error) {
-    console.error("Not found environment file ...");
+    comm.error(chalk.redBright("Not found environment file ...\n"));
     debugError("Full Error : ", _env.error);
   }
 } else {
-  console.error("Not found environment file ...");
+  comm.error(chalk.redBright("Not found environment file ...\n"));
 }
