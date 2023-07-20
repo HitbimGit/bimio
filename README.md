@@ -2,7 +2,7 @@
 
 **Hitbim-CLI (bimio)** is a powerful command line interface designed to streamline the development and distribution of **[Hitbim](https://developer.hitbim.com)** plugins and components.
 
-For more information about terms and usages : **[Hitbim Developer Docs](https://developer.hitbim.com/docs)**
+For more information about terms and usages : **[Hitbim Developer Docs](https://developer.hitbim.com/bim/docs)**
 
 ## Table of Contents
 
