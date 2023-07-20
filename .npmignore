@@ -10,7 +10,7 @@ package-lock.json
 .env.production.local
 .env.local
 .env.dev
-.env.prod
+#.env.prod
 
 # Built Files
 .bimio
