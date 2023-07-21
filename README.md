@@ -1,5 +1,7 @@
 # Hitbim-CLI (bimio)
 
+![Hitbim-CLI](./assets/img/cli_example.png)
+
 **Hitbim-CLI (bimio)** is a powerful command line interface designed to streamline the development and distribution of **[Hitbim](https://developer.hitbim.com)** plugins and components.
 
 For more information about terms and usages : **[Hitbim Developer Docs](https://developer.hitbim.com/bim/docs)**
@@ -33,6 +35,11 @@ With **Hitbim-CLI (bimio)**, developers can easily initialize projects, generate
 
 Install **Hitbim-CLI (bimio)** globally with npm:
 
+**Mac**
+```
+sudo npm install -g @flipperhitbim/bimio
+```
+**Windows**
 ```
 npm install -g @flipperhitbim/bimio
 ```
