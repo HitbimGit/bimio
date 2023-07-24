@@ -172,7 +172,9 @@ Download from **[Hitbim](https://developer.hitbim.com)** Services. You must sele
 bimio upload --plugin <pluginNames...>
 bimio upload --component <componentNames...>
 bimio upload --all
-bimio upload --new
+bimio upload --plugin <pluginNames...> --new
+bimio upload --component <componentNames...> --new
+bimio upload --all --new
 ```
 
 Upload to **[Hitbim](https://developer.hitbim.com)** Services. You must select either plugin, component, or all. If you want to upload as new, use the '--new' option.
