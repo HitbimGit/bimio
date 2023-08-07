@@ -10,6 +10,7 @@ For more information about terms and usages : **[Hitbim Developer Docs](https://
 
 - [Overview](#overview)
 - [Installation](#installation)
+- [Basic Options](#basic-options)
 - [Usage](#usage)
 - [Getting Started](#getting-started)
 - [Command List](#command-list)
@@ -36,13 +37,34 @@ With **Hitbim-CLI (bimio)**, developers can easily initialize projects, generate
 Install **Hitbim-CLI (bimio)** globally with npm:
 
 **Mac**
+
 ```
 sudo npm install -g @flipperhitbim/bimio
 ```
+
 **Windows**
+
 ```
 npm install -g @flipperhitbim/bimio
 ```
+
+## Basic Options
+
+**Hitbim-CLI (bimio)** provides some basic options that can be used with any command:
+
+- `-v, --version` : Display current `bimio` version number.
+- `-da, --debug-all` : Enable all debug info output.
+- `-ds, --debug-server` : Enable server debug info output.
+- `-de, --debug-error` : Enable error debug info output.
+- `-h, --help` : Display help for command.
+
+### Example:
+
+```
+bimio [command] -ds -de
+```
+
+This will execute the given command with server debug info and error debug info output enabled.
 
 ## Usage
 
@@ -51,6 +73,8 @@ npm install -g @flipperhitbim/bimio
 ```
 bimio [command] [options]
 ```
+
+Always feel free to use `bimio --help` or `bimio -h` to see a list of available commands and options!
 
 ## Getting Started
 
@@ -178,6 +202,14 @@ bimio upload --all --new
 ```
 
 Upload to **[Hitbim](https://developer.hitbim.com)** Services. You must select either plugin, component, or all. If you want to upload as new, use the '--new' option.
+
+### docs
+
+```
+bimio docs
+```
+
+Show **[Hitbim Docs](https://developer.hitbim.com/bim/docs)** on your browser.
 
 ### help
 
