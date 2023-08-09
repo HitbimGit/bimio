@@ -73,16 +73,33 @@ img.hb-logo {
   overflow-y: auto;
 }
 
+#plugin-list-wrap * {
+  user-select: none;
+}
+
 #plugin-list-wrap > h3 {
   font-weight: 700;
   color: #4285f4;
   font-size: 1rem;
+}
+
+#plugin-list-wrap > h3:nth-child(1) {
   margin-bottom: 3rem;
 }
 
-#plugin-list {
+#plugin-list-wrap > h4 {
+  font-weight: 600;
+  color: #4285f4;
+  font-size: 1rem;
+  padding-left: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+#plugin-list,
+#component-list {
   display: flex;
-  gap: 12px;
+  gap: 1rem;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -90,7 +107,12 @@ img.hb-logo {
   flex-wrap: nowrap;
 }
 
-div.plugin-item {
+#plugin-list {
+  margin-bottom: 3rem;
+}
+
+div.plugin-item,
+div.component-item {
   cursor: pointer;
   color: #5f6d7e;
   width: 100%;
@@ -103,13 +125,15 @@ div.plugin-item {
   font-size: 0.9rem;
 }
 
-div.plugin-item:is(.selected, :hover, :focus) {
+div.plugin-item:is(.selected, :hover, :focus),
+div.component-item:is(.selected, :hover, :focus) {
   background-color: #f9f9f9;
   transition: 0.3s;
   border-radius: 7px;
 }
 
-div.plugin-item.selected {
+div.plugin-item.selected,
+div.component-item.selected {
   color: #4285f4;
   font-weight: 600;
   padding-left: 25px;

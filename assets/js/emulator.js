@@ -1,12 +1,13 @@
 /**
  * @fileoverview emulator.js
  * @since 23.06.27
+ * @lastupdate 23.08.09
  * @author HyunHo <john_an@hitbim.com>
  * @copyright
- * {@link https://hitbim.com Hitbim} © 2023 All Rights Reserved
+ * {@link https://developer.hitbim.com Hitbim} © 2023 All Rights Reserved
  *
  *
- * All files and information contained in this Software are copyright by {@link https://hitbim.com Hitbim},
+ * All files and information contained in this Software are copyright by {@link https://developer.hitbim.com Hitbim},
  * and may not be duplicated, copied, modified or adapted, in any way without our written permission.
  *
  *
@@ -15,7 +16,7 @@
  *
  *
  * Your use of our Software and Services does not constitute any right or license for you
- * to use our Services, Tools, Software, marks or trademarks, without the prior written permission of {@link https://hitbim.com Hitbim}.
+ * to use our Services, Tools, Software, marks or trademarks, without the prior written permission of {@link https://developer.hitbim.com Hitbim}.
  *
  *
  * Our Content, as found within our Software, Website, Tools and Services, are protected under United States and foreign copyrights.
@@ -23,7 +24,7 @@
  * Your use of our Software, Website, Tools and Services does not grant you any ownership rights to our Content.
  *
  *
- * Copyright © {@link https://hitbim.com Hitbim} ©. All Rights Reserved.
+ * Copyright © {@link https://developer.hitbim.com Hitbim} ©. All Rights Reserved.
  */
 
 /**
@@ -95,13 +96,19 @@ let appData;
 let pluginData;
 /**
  * @description
+ * saves whether this project has plugin or not
+ * @type {boolean}
+ */
+let hasPlugin = false;
+/**
+ * @description
  * @type {Object}
  * all the components data
  */
 let componentData;
 /**
  * @description
- * tabbar data
+ * current tabbar data
  * @type {Object}
  */
 let tabbarData;
@@ -117,29 +124,87 @@ $(function () {
   appData = $("main").data("app");
   componentData = $("main").data("component");
   pluginData = appData[0];
-  if (componentData) {
-    tabbarData = componentData["tabbar"];
-    if (tabbarData) hasTabbar = true;
-  }
 
   // [init] device frame load
   loadDeviceFrame(currentDeviceFrameType);
 
-  const init_pluginPath = getFullPath({
-    type: "plugin",
-    plugin: pluginData.pluginName,
-    page: pluginData.index,
-  });
+  // Check plugin data
+  hasPlugin =
+    typeof pluginData !== "undefined" &&
+    typeof pluginData.pluginName !== "undefined" &&
+    typeof pluginData.index !== "undefined";
 
-  // load initial plugin content
-  loadPluginContent(init_pluginPath);
+  // If plugin data exists
+  if (hasPlugin) {
+    // Set initial plugin path
+    const init_pluginPath = getFullPath({
+      type: "plugin",
+      plugin: pluginData.pluginName,
+      page: pluginData.index,
+    });
+
+    // load initial plugin content
+    loadPluginContent(init_pluginPath);
+  } else {
+    const noPluginDiv = `<div style="width: 100%; height: 100%; display:flex; flex-direction: column; flex-wrap: nowrap; justify-content: center;     align-items: center;">
+      <img src="/assets/img/logo-white.png" alt="HitBim" style="width: 30%; margin-bottom: 3rem;"/>
+      <p>There is no plugin yet ...</p>
+      <p>Create one with following command</p>
+      <code style="font-family: source-code-pro, Menlo, Monaco, Consolas, monospace; color: #fff23c; font-weight: 500; margin-top: 1rem;">
+        bimio create -p Sample1
+      </code>
+    </div>`;
+
+    let $body = $("#ems-device-iframe").contents().find("body");
+    $body.css({
+      "font-weight": 500,
+      "font-size": "1.2rem",
+      "text-align": "center",
+      color: "#f7f8fa",
+      "background-color": "#4285f4",
+    });
+    $body.append(noPluginDiv);
+  }
+
+  // Check component data
+  if (componentData) {
+    // Set list of tabbar data
+    let tabbarListData = componentData["tabbar"];
+
+    // Check whether this project has tabbar
+    if (tabbarListData) hasTabbar = true;
+
+    // Set initial tabbar data
+    if (hasTabbar) tabbarData = tabbarListData[0];
+  }
 
   if (hasTabbar) {
+    // Set initial tabbar path
     const init_tabbarPath = getFullPath({
       type: "tabbar",
+      component: tabbarData.name,
       page: tabbarData.index,
     });
+
+    // load initial tabbar content
     loadTabbarContent(init_tabbarPath);
+
+    // Create IE + others compatible event handler
+    var eventMethod = window.addEventListener
+      ? "addEventListener"
+      : "attachEvent";
+    var eventer = window[eventMethod];
+    var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+    // Listen to message from child window
+    eventer(
+      messageEvent,
+      function (e) {
+        const eventList = JSON.parse(e.data);
+        selectPlugin(eventList);
+      },
+      false
+    );
   } else {
     removeTabbar();
   }
@@ -159,9 +224,11 @@ $(function () {
         emsTabbarIframeDiv.style.display = "block";
         emsTabbarIframeDiv.style.visibility = "visible";
       }
-      document
-        .getElementById("ems-device-iframe")
-        .contentDocument.location.reload(true);
+      if (hasPlugin) {
+        document
+          .getElementById("ems-device-iframe")
+          .contentDocument.location.reload(true);
+      }
     } else if ($(this).hasClass("zoomout")) {
       if (!checkFullScreenMode()) {
         $(this).remove();
@@ -194,18 +261,20 @@ $(function () {
         emsTabbarIframeDiv.style.display = "block";
         emsTabbarIframeDiv.style.visibility = "visible";
       }
-      // pluginData = appData[0];
-      const pluginPath = getFullPath({
-        type: "plugin",
-        plugin: pluginData.pluginName,
-        page: pluginData.index,
-      });
-      loadPluginContent(pluginPath);
+      if (hasPlugin) {
+        const pluginPath = getFullPath({
+          type: "plugin",
+          plugin: pluginData.pluginName,
+          page: pluginData.index,
+        });
+        loadPluginContent(pluginPath);
+      }
       loadDeviceFrame(currentDeviceFrameType);
 
       if (hasTabbar) {
         const tabbarPath = getFullPath({
           type: "tabbar",
+          component: tabbarData.name,
           page: tabbarData.index,
         });
         loadTabbarContent(tabbarPath);
@@ -250,12 +319,32 @@ $(function () {
   $("#plugin-list").on("click", ".plugin-item", function () {
     if ($(this).hasClass("selected")) return;
 
-    $(".plugin-item").removeClass("selected");
+    let pName = $(this).data("name");
+    let pPage = $(this).data("index");
+
+    selectPlugin({ page: pPage, plugin: pName });
+  });
+
+  // when component item is clicked
+  $("#component-list").on("click", ".component-item", function () {
+    if ($(this).hasClass("selected")) return;
+
+    $(".component-item").removeClass("selected");
     $(this).addClass("selected");
 
-    let pName = $(this).data("name");
+    let cName = $(this).data("name");
+    let cIndex = $(this).data("index");
 
-    setConfig({ plugin: pName });
+    tabbarData.name = cName;
+    tabbarData.index = cIndex;
+
+    const tabbar_path = getFullPath({
+      type: "tabbar",
+      component: tabbarData.name,
+      page: tabbarData.index,
+    });
+
+    loadTabbarContent(tabbar_path);
   });
 
   // when Hitbim log is clicked
@@ -264,10 +353,8 @@ $(function () {
   });
 });
 
-// functions
-// device frame load
 /**
- *
+ * device frame load
  * @param {*} type
  */
 function loadDeviceFrame(type) {
@@ -406,8 +493,10 @@ function loadDeviceFrame(type) {
   tabbarIframe.removeClass("loading");
 }
 
-// get current time and format for time set
-// hh:mm
+/**
+ * get current time and format for time set
+ * @returns {string} hh:mm
+ */
 function getCurrentTime() {
   var d = new Date();
   var hour = ("0" + d.getHours()).slice(-2);
@@ -415,12 +504,27 @@ function getCurrentTime() {
   return `${hour}:${min}`;
 }
 
-// load content in iframe
+/**
+ * load content in iframe
+ * @param {string} url
+ */
 function loadPluginContent(url) {
   $("#ems-device-iframe").attr("src", url);
-  // document.getElementById(
-  //   "ems-device-iframe"
-  // ).contentWindow.document.location.href = url;
+}
+
+/**
+ * select current plugin
+ * @param {object} config
+ * @param {string} config.page Plugin Page
+ * @param {string} config.plugin Plugin Name
+ * @param {boolean} [config.reload = false] reload or not
+ * @param {boolean} [config.scrollTop = false] scroll top or not
+ * @param {boolean} [config.animation = false] animation or not
+ */
+function selectPlugin(config) {
+  $(".plugin-item").removeClass("selected");
+  $(`.plugin-item[data-name="${config.plugin}"]`).addClass("selected");
+  setConfig(config);
 }
 
 /**
@@ -442,6 +546,7 @@ function loadTabbarContent(url) {
  * @param {Object} params
  * @param {string} params.type plugin or tabbar
  * @param {string} params.plugin plugin name
+ * @param {string} params.component component name
  * @param {string} params.page html name
  * @returns {string} Full path
  */
@@ -451,7 +556,7 @@ function getFullPath(params) {
     return `/PLUGINS/${params.plugin}/${params.page}`;
   } else if (params.type == "tabbar") {
     // tabbar
-    return `/COMPONENTS/tabbar/${params.page}`;
+    return `/COMPONENTS/${params.type}/${params.component}/${params.page}`;
   }
 }
 
