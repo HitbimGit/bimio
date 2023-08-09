@@ -1,6 +1,6 @@
 {
   "name": "@flipperhitbim/bimio",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "CLI for Hitbim Plugin Development",
   "main": "bin/bimio",
   "repository": {
@@ -19,7 +19,14 @@
     "bimio": "bin/bimio"
   },
   "author": "Hitbim",
+  "contributors": [
+    {
+      "name": "HyunHo",
+      "email": "john_an@hitbim.com"
+    }
+  ],
   "homepage": "https://developer.hitbim.com",
+  "bugs": "https://github.com/HitbimGit/bimio/issues",
   "license": "ISC",
   "keywords": [
     "bimio",
