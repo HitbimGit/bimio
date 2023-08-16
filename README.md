@@ -13,7 +13,7 @@ For more information about terms and usages : **[Hitbim Developer Docs](https://
 - [Basic Options](#basic-options)
 - [Usage](#usage)
 - [Getting Started](#getting-started)
-- [Real-time Development](#real-time-development)
+- [Real-Time Development](#real-time-development)
 - [Project Structure](#project-structure)
 - [Command List](#command-list)
   - [init](#init)
@@ -106,7 +106,7 @@ To run your project locally, use the **'run'** command:
 bimio run
 ```
 
-## Real-time Development
+## Real-Time Development
 
 ![Real-Time-Development](./assets/img/real_time_development.png)
 
@@ -125,7 +125,7 @@ Using `bimio` alongside an Integrated Development Environment (IDE) like VS Code
 
    - For an optimal experience, consider using a dual-screen setup. On one screen, keep your IDE open with the project files. On the other, have a browser window showing the live server.
 
-4. **Real-time Feedback Loop**:
+4. **Real-Time Feedback Loop**:
 
    - As you make changes to your plugin or component in the IDE, save the file.
    - Switch to the browser window. Thanks to `bimio`, you'll see the changes reflected instantly by refreshing, restarting of developer server is not needed. This allows for a smooth, real-time feedback loop.
@@ -168,7 +168,7 @@ ProjectName
          ├─ lang
          │  ├─ en.json
          │  └─ kr.json
-         ├─ Sample.html
+         ├─ index.html
          └─ templates
             └─ Sample.html
 ```
@@ -199,11 +199,10 @@ Below is a summary of the key files and directories created by `bimio` in the pr
       - **`assets`**: Holds static assets for the plugin, like images or other files.
       - **`config.json`**: Configuration file for the plugin, defining its properties and behavior.
       - **`css`**: Contains the CSS files specific to the plugin.
-      - **`img`**: A directory for images specifically used by the plugin.
       - **`js`**: Contains the JavaScript files defining the behavior of the plugin.
       - **`key`**: File for plugin authentication and credentials.
       - **`lang`**: Contains localization files, with `en.json` for English and `kr.json` for Korean.
-      - **`Sample.html`**: The main HTML interface file for the plugin.
+      - **`index.html`**: The main HTML interface file for the plugin.
       - **`templates`**: Directory for pages of the plugin.
 
 This structure ensures a systematic approach to developing and managing plugins and components using `bimio`. Remember, while this structure provides a guideline, it's flexible and can be customized based on the specific needs and requirements of your project.
