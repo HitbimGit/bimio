@@ -1,6 +1,6 @@
 {
   "name": "@flipperhitbim/bimio",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "CLI for Hitbim Plugin Development",
   "main": "bin/bimio",
   "repository": {
